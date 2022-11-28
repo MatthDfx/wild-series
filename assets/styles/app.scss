@@ -5,7 +5,8 @@ body {
 // assets/styles/global.scss
 
 // the ~ allows you to reference things in node_modules
-@import "~bootstrap/scss/bootstrap";
+
 
 $primary: #7FB069;
 $secondary: #FFFBBD;
+@import "~bootstrap/scss/bootstrap";
