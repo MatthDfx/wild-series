@@ -6,52 +6,34 @@ use App\Entity\Episode;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class EpisodeFixtures extends Fixture implements DependentFixtureInterface
 {
-    const EPISODE = [
-        [
-            'title' => 'Changes',
-            'number' => 1,
-            'synopsis' => 'Début de la série',
-            'season' => 1,
-        ],
-        [
-            'title' => 'The Big Sister',
-            'number' => 2,
-            'synopsis' => 'Pas de synopsis',
-            'season' => 1,
-        ],
-        [
-            'title' => 'Old Man Dexter',
-            'number' => 3,
-            'synopsis' => 'Pas de synopsis',
-            'season' => 1,
-        ],
-        [
-            'title' => 'Deedeemensional',
-            'number' => 4,
-            'synopsis' => 'Pas de synopsis',
-            'season' => 1,
-        ],
-        [
-            'title' => 'Dial M for Monkey: Magmanamus',
-            'number' => 5,
-            'synopsis' => 'Pas de synopsis',
-            'season' => 1,
-        ],
-
-    ];
     public function load(ObjectManager $manager): void
     {
-        foreach (self::EPISODE as $key => $value) {
+        //Puis ici nous demandons à la Factory de nous fournir un Faker
+        $faker = Factory::create();
 
-            $episode = new Episode();
-            $episode->setTitle($value['title']);
-            $episode->setNumber($value['number']);
-            $episode->setSynopsis($value['synopsis']);
-            $episode->setSeason($this->getReference('season_' . $value['season']));
-            $manager->persist($episode);
+        /**
+         * L'objet $faker que tu récupère est l'outil qui va te permettre 
+         * de te générer toutes les données que tu souhaites
+         */
+
+        for ($i = 0; $i < 5; $i++) {
+            for ($j = 1; $j < 6; $j++) {
+                for ($k = 1; $k < 11; $k++) {
+
+
+                    $episode = new Episode();
+                    //Ce Faker va nous permettre d'alimenter l'instance de episode que l'on souhaite ajouter en base
+                    $episode->setNumber($k);
+                    $episode->setTitle($faker->words(3, true));
+                    $episode->setSynopsis($faker->paragraph());
+                    $episode->setSeason($this->getReference('program_' . $i . '_season_' . $j));
+                    $manager->persist($episode);
+                }
+            }
         }
         $manager->flush();
     }
