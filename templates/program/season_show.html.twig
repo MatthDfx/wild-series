@@ -6,11 +6,16 @@
 {% block body %}
 	<div class="media">
 		<div class="media-body">
-			<h1 class="mt-0">{{ season.number }}</h1>
-			<p>{{ season.year }}</p>
+			<h1 class="mt-0">Saison n°{{ season.number }}</h1>
+			<p>Année de sortie:
+				{{ season.year }}</p>
 
+			<h2>Liste des épisodes:</h2>
 			{% for episode in season.episodes %}
-				<p>{{ episode.title }}</p>
+				<li>{{ episode.title }}</li>
+				<p>
+					<a href="{{ path("program_episode_show", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Détail</a>
+				</p>
 			{% endfor %}
 		</div>
 	</div>

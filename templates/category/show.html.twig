@@ -14,6 +14,10 @@
 				<h1 class="mt-0">{{ program.title }}
 					n°{{ program.id}}</h1>
 				<p>{{ program.synopsis }}</p>
+				<p>
+					<a href="{{ path("program_show", {program : program.id}) }}">Voir la fiche</a>
+				</p>
+
 			</div>
 		{% else %}
 			Aucune série trouvée.
