@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,5 +41,13 @@ class CategoryController extends AbstractController
             'category' => $category,
             'programs' => $programs,
         ]);
+    }
+
+    #[Route('/new', name: 'new')]
+    public function new(): Response
+    {
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
+        return $this->renderForm('category/new.html.twig', ['form' => $form]);
     }
 }
