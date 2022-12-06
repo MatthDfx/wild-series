@@ -23,7 +23,7 @@ class Episode
     private ?Season $season = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(255)]
+    #[Assert\Length(max: 255)]
     #[Assert\NotBlank]
     private ?string $title = null;
 

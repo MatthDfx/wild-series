@@ -13,27 +13,32 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         [
             'title' => 'Phénomène Raven',
             'synopsis' => 'une meuf avec des visions',
-            'category' => 'category_Action'
+            'category' => 'category_Action',
+            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
         ],
         [
             'title' => 'Le laboratoire de Dexter',
             'synopsis' => 'un petit scientifique',
-            'category' => 'category_Aventure'
+            'category' => 'category_Aventure',
+            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
         ],
         [
             'title' => 'Les supers nana',
             'synopsis' => 'Trois enfants qui veulent vaincre un méchant singe',
-            'category' => 'category_Animé'
+            'category' => 'category_Animé',
+            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
         ],
         [
             'title' => 'Mi-chat mi-chien',
             'synopsis' => 'Comment font-ils pour être copain ?',
-            'category' => 'category_Fantastique'
+            'category' => 'category_Fantastique',
+            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
         ],
         [
             'title' => 'Johnny Bravo',
             'synopsis' => 'Hi-Ha-Hou purée chui beau',
-            'category' => 'category_Romantique'
+            'category' => 'category_Romantique',
+            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
         ],
 
     ];
@@ -46,6 +51,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setSynopsis($value['synopsis']);
             $program->setCategory($this->getReference($value['category']));
             $this->addReference('program_' . $key, $program);
+            $program->setPoster($value['poster']);
             $manager->persist($program);
         }
         $manager->flush();

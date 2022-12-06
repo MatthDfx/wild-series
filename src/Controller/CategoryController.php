@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
@@ -24,8 +26,10 @@ class CategoryController extends AbstractController
         // Get data from HTTP request
         $form->handleRequest($request);
         // Was the form submitted ?
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepository->save($category, true);
+            $this->addFlash('success', 'La nouvelle catégorie a bien été crée !');
+            return $this->redirectToRoute('category_index');
             // Deal with the submitted data
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
@@ -39,8 +43,9 @@ class CategoryController extends AbstractController
 
     #[Route('/', name: 'index')]
 
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(CategoryRepository $categoryRepository, RequestStack $requestStack): Response
     {
+        $session = $requestStack->getSession();
         $categories = $categoryRepository->findAll();
 
         return $this->render('category/index.html.twig', [

@@ -22,8 +22,10 @@ class ProgramController extends AbstractController
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $programRepository->save($program, true);
+            $this->addFlash('success', 'La série a bien été ajouté');
         }
 
         return $this->renderForm('program/new.html.twig', [
