@@ -20,25 +20,25 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             'title' => 'Le laboratoire de Dexter',
             'synopsis' => 'un petit scientifique',
             'category' => 'category_Aventure',
-            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
+            'poster' => 'https://fr.web.img6.acsta.net/pictures/15/09/01/14/51/314868.jpg'
         ],
         [
             'title' => 'Les supers nana',
             'synopsis' => 'Trois enfants qui veulent vaincre un méchant singe',
             'category' => 'category_Animé',
-            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
+            'poster' => 'https://fr.web.img4.acsta.net/r_654_368/newsv7/20/08/25/10/06/2795311.jpg'
         ],
         [
             'title' => 'Mi-chat mi-chien',
             'synopsis' => 'Comment font-ils pour être copain ?',
             'category' => 'category_Fantastique',
-            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
+            'poster' => 'https://images.mubicdn.net/images/film/265885/cache-547214-1590030085/image-w1280.jpg?size=800x'
         ],
         [
             'title' => 'Johnny Bravo',
             'synopsis' => 'Hi-Ha-Hou purée chui beau',
             'category' => 'category_Romantique',
-            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
+            'poster' => 'https://images.justwatch.com/poster/273336247/s592/johnny-bravo'
         ],
 
     ];
