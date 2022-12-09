@@ -136,6 +136,7 @@ class Program
             $this->actors->add($actor);
             $actor->addProgram($this);
         }
+        $this->actors[] = $actor;
 
         return $this;
     }
@@ -145,6 +146,7 @@ class Program
         if ($this->actors->removeElement($actor)) {
             $actor->removeProgram($this);
         }
+        $this->actors->removeElement($actor);
 
         return $this;
     }
