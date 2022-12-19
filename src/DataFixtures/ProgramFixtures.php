@@ -6,9 +6,15 @@ use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
+    private SluggerInterface $slugger;
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
     const PROGRAM = [
         [
             'title' => 'Phénomène Raven',
@@ -48,6 +54,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
             $program = new Program();
             $program->setTitle($value['title']);
+            $program->setSlug($this->slugger->slug($program->getTitle())->title());
             $program->setSynopsis($value['synopsis']);
             $program->setCategory($this->getReference($value['category']));
             $this->addReference('program_' . $key, $program);
