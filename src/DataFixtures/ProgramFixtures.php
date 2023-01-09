@@ -13,32 +13,27 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         [
             'title' => 'Phénomène Raven',
             'synopsis' => 'une meuf avec des visions',
-            'category' => 'category_Action',
-            'poster' => 'https://fr.web.img4.acsta.net/pictures/20/03/17/13/29/4568012.jpg'
+            'category' => 'category_Action'
         ],
         [
             'title' => 'Le laboratoire de Dexter',
             'synopsis' => 'un petit scientifique',
-            'category' => 'category_Aventure',
-            'poster' => 'https://fr.web.img6.acsta.net/pictures/15/09/01/14/51/314868.jpg'
+            'category' => 'category_Aventure'
         ],
         [
             'title' => 'Les supers nana',
             'synopsis' => 'Trois enfants qui veulent vaincre un méchant singe',
-            'category' => 'category_Animé',
-            'poster' => 'https://fr.web.img4.acsta.net/r_654_368/newsv7/20/08/25/10/06/2795311.jpg'
+            'category' => 'category_Animé'
         ],
         [
             'title' => 'Mi-chat mi-chien',
             'synopsis' => 'Comment font-ils pour être copain ?',
-            'category' => 'category_Fantastique',
-            'poster' => 'https://images.mubicdn.net/images/film/265885/cache-547214-1590030085/image-w1280.jpg?size=800x'
+            'category' => 'category_Fantastique'
         ],
         [
             'title' => 'Johnny Bravo',
             'synopsis' => 'Hi-Ha-Hou purée chui beau',
-            'category' => 'category_Romantique',
-            'poster' => 'https://images.justwatch.com/poster/273336247/s592/johnny-bravo'
+            'category' => 'category_Romantique'
         ],
 
     ];
@@ -51,10 +46,10 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setSynopsis($value['synopsis']);
             $program->setCategory($this->getReference($value['category']));
             $this->addReference('program_' . $key, $program);
-            $program->setPoster($value['poster']);
+            $program->setPosterFile(null);
             $manager->persist($program);
+            $manager->flush();
         }
-        $manager->flush();
     }
 
     public function getDependencies()
