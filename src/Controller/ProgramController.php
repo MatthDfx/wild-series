@@ -11,13 +11,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
 {
     #[Route('/new', name: 'new')]
-    public function new(Request $request, ProgramRepository $programRepository): Response
+    public function new(Request $request, MailerInterface $mailer, ProgramRepository $programRepository): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -26,6 +28,14 @@ class ProgramController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $programRepository->save($program, true);
             $this->addFlash('success', 'La série a bien été ajouté');
+
+            $email = (new Email())
+                ->from('matthieu@gmail.com')
+                ->to('matthieu.dufloux@gmail.com')
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html('<p> Une nouvelle série vient d\'être publiée sur Wild Séries !</p>');
+
+            $mailer->send($email);
         }
 
         return $this->renderForm('program/new.html.twig', [
