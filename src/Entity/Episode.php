@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EpisodeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,6 +35,14 @@ class Episode
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
     private ?string $synopsis = null;
+
+    #[ORM\ManyToMany(targetEntity: Comment::class, mappedBy: 'episode_id')]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -83,6 +93,33 @@ class Episode
     public function setSynopsis(string $synopsis): self
     {
         $this->synopsis = $synopsis;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->addEpisodeId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            $comment->removeEpisodeId($this);
+        }
 
         return $this;
     }

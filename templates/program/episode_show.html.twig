@@ -14,7 +14,13 @@
 			<p>Résumé de l'épisode:</p>
 			<p>
 				{{ episode.synopsis }}</p>
+			<p></p>
+			<p></p>
+			{% if app.user %}
 
+				<p>Laisser un commentaire :
+				</p>
+			{% endif %}
 		</div>
 	</div>
 
